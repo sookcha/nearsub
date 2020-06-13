@@ -1,0 +1,35 @@
+app: nearsub
+service: nearsub
+name: nearsub-api
+org: sookcha
+
+inputs:
+  src: ./dist
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-northeast-2
+  environment:
+    SEOUL_OPEN_API_KEY: ${ssm:SEOUL_OPEN_API_KEY~true}
+
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http: ANY /
+    environment:
+      NODE_ENV: ${opt:stage, 'development'}
+    reservedConcurrency: 5
+
+custom:
+  webpack:
+    includeModules: true
+    packager: 'npm'
+    webpackConfig: './webpack.config.js'
+  serverless-offline:
+    useChildProcesses: true

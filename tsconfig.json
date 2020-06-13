@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "outDir": "./",
+      "allowJs": true,
+      "target": "es2015",
+      "module": "commonjs",
+      "sourceMap": true,
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+   
+  ],
+  "typeRoots" : ["node_modules/@types",]
+}
